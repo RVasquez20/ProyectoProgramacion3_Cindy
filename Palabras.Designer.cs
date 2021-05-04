@@ -46,7 +46,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(98, 9);
+            this.label1.Location = new System.Drawing.Point(80, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(126, 96);
             this.label1.TabIndex = 1;
@@ -58,6 +58,7 @@
             this.ListaPalabras.Location = new System.Drawing.Point(13, 122);
             this.ListaPalabras.Multiline = true;
             this.ListaPalabras.Name = "ListaPalabras";
+            this.ListaPalabras.ReadOnly = true;
             this.ListaPalabras.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ListaPalabras.Size = new System.Drawing.Size(276, 352);
             this.ListaPalabras.TabIndex = 2;

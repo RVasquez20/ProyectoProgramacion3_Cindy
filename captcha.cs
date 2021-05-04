@@ -14,7 +14,7 @@ namespace ProyectoProgramacion
     public partial class captcha : Form
     {
         String start = "", Progress = "",PalabraEscritaConfirmada="";
-        int intentosRestantes = 3, PedazosMostrados = 0,j=1;
+        int intentosRestantes = 3, PedazosConfirm = 0,j=1;
         Hashtable Confirmadas = new Hashtable();
         Queue<Bitmap> Pedazitos = new Queue<Bitmap>();
         Queue<Queue<Bitmap>> Listado = new Queue<Queue<Bitmap>>();
@@ -118,8 +118,8 @@ namespace ProyectoProgramacion
                         key = GenerarKey();
                         Confirmadas.Add(key, start);
                     GuardarPalabra(key,start);
-                    PedazosMostrados++;
-                    ListarFacturas(PedazosMostrados,start);
+                    PedazosConfirm++;
+                    ListarFacturas(PedazosConfirm,start);
                        
                     j++;
                     palabraconf.Text = Confirmadas[j].ToString();
@@ -141,7 +141,7 @@ namespace ProyectoProgramacion
                         Pedazitos.Clear();
                             Pedazitos = Listado.Dequeue();
                             j = 1;
-                        PedazosMostrados = 0;
+                        PedazosConfirm = 0;
                             pictureBox1.Image = Pedazitos.Dequeue();
                             palabraconf.Text = Confirmadas[1].ToString();
                             this.Invoke(new Action(() => { pictureBox1.Refresh();  }));
