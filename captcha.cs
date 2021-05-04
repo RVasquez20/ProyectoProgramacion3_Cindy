@@ -14,7 +14,7 @@ namespace ProyectoProgramacion
     public partial class captcha : Form
     {
         String start = "", Progress = "",PalabraEscritaConfirmada="";
-        int intentos = 3, PedazosMostrados = 0,j=1;
+        int intentosRestantes = 3, PedazosMostrados = 0,j=1;
         Hashtable Confirmadas = new Hashtable();
         Queue<Bitmap> Pedazitos = new Queue<Bitmap>();
         Queue<Queue<Bitmap>> Listado = new Queue<Queue<Bitmap>>();
@@ -64,26 +64,24 @@ namespace ProyectoProgramacion
             {
                 if (j > Confirmadas.Count)
                 { j = 1; }
-                if (intentos == 3)
+                if (intentosRestantes == 3)
                     {
                     PalabraEscritaConfirmada = "";
                         start = "";
                         start = textBoxnoconfirmada.Text;
                         textBoxnoconfirmada.Text = "";
                     PalabraEscritaConfirmada = palabraconf.Text;
-                    MessageBox.Show(PalabraEscritaConfirmada);
-                    
                      if (PalabraEscritaConfirmada.Equals(textBoxconfirmada.Text)) {
-                        --intentos; textBoxconfirmada.Focus(); textBoxconfirmada.Text = ""; textBoxnoconfirmada.Text = "";
+                        --intentosRestantes; textBoxconfirmada.Focus(); textBoxconfirmada.Text = ""; textBoxnoconfirmada.Text = "";
                     }
                         else {
-                        MessageBox.Show("Las Palabras no coinciden Inicie de nuevo intentos 3 1");
-                        intentos = 3; textBoxconfirmada.Focus();
-                         }
+                        MessageBox.Show("Las Palabras no coinciden Inicie de nuevo intentos restantes 3 ");
+                        intentosRestantes = 3; textBoxconfirmada.Focus(); textBoxconfirmada.Text = ""; textBoxnoconfirmada.Text = "";
+                    }
                     }
                     else
 
-                    if (intentos > 0 && intentos < 3)
+                    if (intentosRestantes > 0 && intentosRestantes < 3)
                     {
                     PalabraEscritaConfirmada = "";
                     Progress = "";
@@ -95,24 +93,25 @@ namespace ProyectoProgramacion
                         if (start.Equals(Progress)&& PalabraEscritaConfirmada.Equals(textBoxconfirmada.Text))
                         {
                         textBoxconfirmada.Focus(); textBoxconfirmada.Text = "";
-                        --intentos;
+                        textBoxnoconfirmada.Text = "";
+                        --intentosRestantes;
                         }
                         else
                         {
-                            MessageBox.Show("Las Palabras no coinciden Inicie de nuevo intentos 3 2");
-                            intentos = 3;
+                            MessageBox.Show("Las Palabras no coinciden Inicie de nuevo intentos restantes 3 ");
+                            intentosRestantes = 3; textBoxconfirmada.Text = ""; textBoxnoconfirmada.Text = "";
                         textBoxconfirmada.Focus();
                     }
 
                     }
                 
-                    if (intentos == 0)
+                    if (intentosRestantes == 0)
                     {
                     PalabraEscritaConfirmada = "";
                     textBoxnoconfirmada.Text = "";
                     
                     textBoxconfirmada.Text = "";
-                    string mensaje = "";
+                    
                     textBoxconfirmada.Focus();
                         MessageBox.Show("Palabra Confirmada");
                         int key = 0;
@@ -121,22 +120,17 @@ namespace ProyectoProgramacion
                     GuardarPalabra(key,start);
                     PedazosMostrados++;
                     ListarFacturas(PedazosMostrados,start);
-                        for (int i = 1; i <= Confirmadas.Count; i++)
-                        {
-                            mensaje += "\n" + Confirmadas[i].ToString();
-                        }
-                        MessageBox.Show(mensaje);
+                       
                     j++;
                     palabraconf.Text = Confirmadas[j].ToString();
                     if (Pedazitos.Count != 0)
                         {
-                        MessageBox.Show("Test");
                         pictureBox1.Image = Pedazitos.Dequeue();
                             this.Invoke(new Action(() =>
                             {
                                 pictureBox1.Refresh();
                             }));
-                            intentos = 3;
+                            intentosRestantes = 3;
                         
                        
                         }
@@ -147,19 +141,20 @@ namespace ProyectoProgramacion
                         Pedazitos.Clear();
                             Pedazitos = Listado.Dequeue();
                             j = 1;
+                        PedazosMostrados = 0;
                             pictureBox1.Image = Pedazitos.Dequeue();
                             palabraconf.Text = Confirmadas[1].ToString();
                             this.Invoke(new Action(() => { pictureBox1.Refresh();  }));
-                            intentos = 3;
+                            intentosRestantes = 3;
                         }
                         else
                         {
                             this.Close();
                         }
                     
-                    }//intentos==3
+                    }
                 
-            }//else
+            }
 
         }
         private void ListarFacturas(int PedazosMostrados, string starts)

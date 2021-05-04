@@ -33,8 +33,8 @@
             this.textBoxnoconfirmada = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.palabraconf = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,14 +50,14 @@
             // 
             // textBoxconfirmada
             // 
-            this.textBoxconfirmada.Location = new System.Drawing.Point(78, 229);
+            this.textBoxconfirmada.Location = new System.Drawing.Point(74, 258);
             this.textBoxconfirmada.Name = "textBoxconfirmada";
             this.textBoxconfirmada.Size = new System.Drawing.Size(286, 20);
             this.textBoxconfirmada.TabIndex = 3;
             // 
             // textBoxnoconfirmada
             // 
-            this.textBoxnoconfirmada.Location = new System.Drawing.Point(401, 230);
+            this.textBoxnoconfirmada.Location = new System.Drawing.Point(401, 258);
             this.textBoxnoconfirmada.Name = "textBoxnoconfirmada";
             this.textBoxnoconfirmada.Size = new System.Drawing.Size(297, 20);
             this.textBoxnoconfirmada.TabIndex = 4;
@@ -82,15 +82,6 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "No Confirmada";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pictureBox1.Location = new System.Drawing.Point(401, 52);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(297, 172);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // palabraconf
             // 
             this.palabraconf.AutoSize = true;
@@ -101,18 +92,28 @@
             this.palabraconf.TabIndex = 7;
             this.palabraconf.Text = "label3";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(401, 73);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(297, 164);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            // 
             // captcha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.palabraconf);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxnoconfirmada);
             this.Controls.Add(this.textBoxconfirmada);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.pictureBox1);
             this.Name = "captcha";
             this.Text = "captcha";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -127,7 +128,7 @@
         private System.Windows.Forms.TextBox textBoxnoconfirmada;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label palabraconf;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

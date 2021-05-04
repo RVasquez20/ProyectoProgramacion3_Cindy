@@ -13,7 +13,6 @@ namespace ProyectoProgramacion
 {
     public partial class Principal : Form
     {
-        //string path = "";
         Hashtable palabras = new Hashtable();
         public Principal()
         {
@@ -26,28 +25,26 @@ namespace ProyectoProgramacion
         {
             if ((Application.OpenForms["captcha"] as captcha) == null)
             {
-                //path = "";
-                Queue<String> direcciones = new Queue<String>();
+                Queue<String> paths = new Queue<String>();
                 Queue<Queue<Bitmap>> Listado = new Queue<Queue<Bitmap>>();
-                OpenFileDialog getImage = new OpenFileDialog();
-                getImage.InitialDirectory = "C:\\";
-                getImage.Filter = "Archivos de Imagen (*.jpg)|*jpg;";
-                getImage.Title = "Selecciona la Factura";
-                getImage.Multiselect = true;
-                if (getImage.ShowDialog() == DialogResult.OK)
+                OpenFileDialog imgs = new OpenFileDialog();
+                imgs.InitialDirectory = "C:\\";
+                imgs.Filter = "Archivos de Imagen (*.jpg)|*jpg;";
+                imgs.Title = "Selecciona las Facturas";
+                imgs.Multiselect = true;
+                if (imgs.ShowDialog() == DialogResult.OK)
                 {
-                    foreach (string item in getImage.FileNames)
+                    foreach (string item in imgs.FileNames)
                     {
-                        direcciones.Enqueue(item);
+                        paths.Enqueue(item);
                         
                     }
-                    foreach (string item in direcciones)
+                    foreach (string item in paths)
                     {
                         
                         Listado.Enqueue(Pedazos(item));
                     }
-                    //path += getImage.FileName;
-                    //concatenacion de la ruta del archivo hacia el path para poder ir a cortar la imagen
+                    
                     captcha ob1 = new captcha(Listado);
                     ob1.Show();
 
@@ -66,7 +63,7 @@ namespace ProyectoProgramacion
             {
                 this.Close();
             }
-            }
+        }
 
         public Bitmap Delimitador(Bitmap recurso, Rectangle tamanio)
         {
@@ -82,16 +79,15 @@ namespace ProyectoProgramacion
         {
 
             Queue<Bitmap> pedazosLista = new Queue<Bitmap>();
-            int X = 0, Y = 0, anchura = 200, altura = 100;
+            int X = 0, Y = 0, anchura = 300, altura = 200;
             Bitmap bitmap = new Bitmap(@path);
 
-            int alto = bitmap.Height;
-            int altoSteps = alto / 100;
+            
 
-            for (int i = 0; i < altoSteps; i++)
+            for (int i = 0; i < (bitmap.Height / 200); i++)
             {
                 X = 0;
-                for (int j = 0; j < (bitmap.Width / 200); j++)
+                for (int j = 0; j < (bitmap.Width / 300); j++)
                 {
 
                     Rectangle Cuadro = new Rectangle(X, Y, anchura, altura);
@@ -99,17 +95,20 @@ namespace ProyectoProgramacion
                     Bitmap pedazo = Delimitador(bitmap, Cuadro);
                     pedazosLista.Enqueue(pedazo);
 
-                    X = 200;
+                    X = 300;
                 }
-                Y += 100;
+                Y += 200;
             }
             return pedazosLista;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            AcercaDe formacercade = new AcercaDe();
-            formacercade.Show();
+            if ((Application.OpenForms["AcercaDe"] as AcercaDe) == null)
+            {
+                AcercaDe formacercade = new AcercaDe();
+                formacercade.Show();
+            }
         }
 
         private void MPalabras_Click(object sender, EventArgs e)
@@ -146,8 +145,11 @@ namespace ProyectoProgramacion
 
         private void MFacturas_Click(object sender, EventArgs e)
         {
-            Facturas v2 = new Facturas();
-            v2.Show();
+            if ((Application.OpenForms["Facturas"] as Facturas) == null)
+            {
+                Facturas v2 = new Facturas();
+                v2.Show();
+            }
         }
     }
 }
